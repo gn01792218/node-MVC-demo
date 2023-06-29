@@ -1,18 +1,14 @@
 const { Router } = require('express')
+const { 
+    getUserHomePage,
+    getAddUserPage,
+    postAddUser
+} = require('../controllers/userController')
 
 const router = Router()
-const users = []  //假的db資料
 
-router.get('/',(req, res)=>{
-    res.render('UserHome',{pageTitle:"UserHome",users})
-})
-
-router.get('/addUser',(req, res)=>{
-    res.render('AddUser',{pageTitle:"AddUser"})
-})
-router.post('/addUser',(req, res)=>{
-    users.push({name:req.body.username})
-    res.redirect('/')
-})
+router.get('/', getUserHomePage)
+router.get('/addUser',getAddUserPage)
+router.post('/addUser', postAddUser)
 
 module.exports = router
