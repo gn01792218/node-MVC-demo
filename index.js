@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const ejsLayouts = require('express-ejs-layouts')
 const userRoute = require('./src/routes/user')
+const notFountRoute = require('./src/routes/notFound')
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.use(userRoute)
+app.use(notFountRoute)
 
 app.listen(3000,()=>{
     console.log('監聽 3000')
