@@ -1,5 +1,7 @@
 <%- contentFor('body') %>
+    <!-- action 指名要送到哪一個路由，記得聲明方法為POST -->
     <form action="/addUser" method="POST">
+        <!-- name 屬性即此input欄位的key，而此input的value會是使用者輸入的內容 -->
         <input type="text" name="username" placeholder="輸入使用者名稱">
         <button type="submit">增加使用者</button>
     </form>
