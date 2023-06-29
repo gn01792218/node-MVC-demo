@@ -1,0 +1,12 @@
+<% contentFor('body') %>
+    <h1>使用者名單 : </h1>
+    <p><%= users.length %></p>
+
+    <% if(users.length>0) {%>
+        <% for(user of users) {%>
+            <p><%= user.name%></p>
+        <% }%>
+    <% } else {%>
+        <p>目前無使用者</p>
+    <%}%>
+
