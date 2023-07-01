@@ -4,10 +4,11 @@ npm run dev
 ```
 # MVC 框架
 - controller + routers <br>
-routers 應該只負責 res的部分；
+routers 應該只負責控制 router；
 其他商業邏輯，應該切割到controller裡面 <br>
 - views <br>
-- models <br>
+- models + repositories<br>
+models 只負責定義資料格式；repositories負責調度models資料
 # 專案模板引擎
 使用ejs
 ## ejs的共用layout
