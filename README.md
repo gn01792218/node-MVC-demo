@@ -2,6 +2,9 @@
 ```
 npm run dev
 ```
+# 為專案加上Typescript
+參考我的notion筆記 : <br>
+https://www.notion.so/Node-js-Typscript-83c15175fb1f45c7afc23a22653a1aba
 # MVC 框架
 - controller + routers <br>
 routers 應該只負責控制 router；
