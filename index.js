@@ -5,6 +5,7 @@ const userRoute = require('./src/routes/user')
 const notFountRoute = require('./src/routes/notFound')
 
 const app = express()
+const port = process.env.PORT || 3000
 
 app.set('view engine','ejs')
 app.set('views','src/views')
@@ -19,6 +20,6 @@ app.use(express.json())
 app.use(userRoute)
 app.use(notFountRoute)
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log('監聽 3000')
 })
