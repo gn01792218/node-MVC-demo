@@ -17,5 +17,5 @@ export const postAddUser = (req:Request, res:Response)=>{
         name:req.body.username
     }
     userRepository.add(user)
-    res.redirect('/')
+    res.redirect('/admin/user')
 }
