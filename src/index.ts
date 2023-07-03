@@ -3,6 +3,7 @@ import express from 'express'
 import path from 'path'
 import ejsLayouts from 'express-ejs-layouts'
 import indexRoute from './routes'
+import adminRoute from './routes/admin'
 import userRoute from './routes/user'
 import notFountRoute from './routes/notFound'
 
@@ -19,6 +20,7 @@ app.use('/admin/user',express.static(path.join(__dirname,'..','public'))) //шинх
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 app.use(indexRoute)
+app.use(adminRoute)
 app.use('/admin/user',userRoute)
 app.use(notFountRoute)
 

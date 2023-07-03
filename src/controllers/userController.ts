@@ -7,10 +7,10 @@ import { Request, Response } from 'express'
 const userRepository = new UserRepository()
 
 export const getUserHomePage = (req:Request, res:Response)=>{
-    res.render('UserHome',{pageTitle:"UserHome",users:userRepository.getAll()})
+    res.render('admin/UserHome',{pageTitle:"UserHome",users:userRepository.getAll(),layout:'layouts/adminLayout'})
 }
 export const getAddUserPage = (req:Request, res:Response) => {
-    res.render('AddUser',{pageTitle:"AddUser"})
+    res.render('admin/AddUser',{pageTitle:"AddUser",layout:'layouts/adminLayout'})
 }
 export const postAddUser = (req:Request, res:Response)=>{
     const user:User = {
