@@ -3,7 +3,7 @@ import {
     getUserHomePage,
     getAddUserPage,
     postAddUser
-} from'../controllers/userController'
+} from'../../controllers/userController'
 
 const router = Router()
 

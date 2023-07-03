@@ -3,8 +3,9 @@ import express from 'express'
 import path from 'path'
 import ejsLayouts from 'express-ejs-layouts'
 import indexRoute from './routes'
-import adminRoute from './routes/admin'
-import userRoute from './routes/user'
+import adminRoute from './routes/admin/admin'
+import userRoute from './routes/admin/user'
+import projectRoute from './routes/admin/project'
 import notFountRoute from './routes/notFound'
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(indexRoute)
 app.use(adminRoute)
 app.use('/admin/user',userRoute)
+app.use('/admin/project',projectRoute)
 app.use(notFountRoute)
 
 app.listen(port,()=>{
