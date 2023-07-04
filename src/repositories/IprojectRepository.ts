@@ -4,6 +4,6 @@ export interface IProjectRepository{
     getAll:()=> Partial<Project>[]
     getById:(id:string) => Partial<Project> | undefined
     add:(project:Partial<Project>) => ProjectCRUDResponse
-    edit:(id:string, editProject:ProjectEditReqquest) => ProjectCRUDResponse
+    edit:(editProject:ProjectEditReqquest) => ProjectCRUDResponse
     delete:(id:string) => ProjectCRUDResponse
 }

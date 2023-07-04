@@ -30,6 +30,16 @@ export const postCreateProjectPage = (req: Request, res: Response) => {
   res.redirect("/admin/project");
 };
 
+export const getEditPage = (req: Request, res: Response) => {
+  const project = projectRepository.getById(req.params.id)
+  res.render("admin/project/Edit",{pageTitle:"Edit",layout:"layouts/adminLayout",project})
+};
+
+export const postEditPage = (req: Request, res: Response) => {
+  projectRepository.edit(req.body)
+  res.redirect("/admin/project");
+};
+
 export const deleteProject = (req: Request, res: Response) => {
   projectRepository.delete(req.params.id);
   res.redirect("/admin/project");

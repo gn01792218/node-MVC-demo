@@ -20,8 +20,8 @@ export class ProjectRepository implements IProjectRepository{
             projects:this.getAll()
         }
     }
-    edit(id:string, editProject:ProjectEditReqquest){
-        const project = this.getById(id)
+    edit(editProject:ProjectEditReqquest){
+        const project = this.getById(editProject.id)
         if(project){
             project.title = editProject.title
             project.demoUrl = editProject.demoUrl

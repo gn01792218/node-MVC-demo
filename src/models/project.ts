@@ -10,6 +10,7 @@ export interface Project {
   projectFutureDescription: string;
 }
 export interface ProjectEditReqquest{
+  id: string;
   title: string;
   demoUrl: string;
   imgs: string[];
