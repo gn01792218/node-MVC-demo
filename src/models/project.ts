@@ -20,6 +20,6 @@ export interface ProjectEditReqquest{
   projectFutureDescription: string;
 }
 export interface ProjectCRUDResponse{
-    project:Project | undefined,
-    projects:Project[]
+    project:Partial<Project> | undefined,
+    projects:Partial<Project>[]
 }

@@ -1,6 +1,6 @@
 import { Project } from "../models/project"
 
-export const projectList:Project[] = [
+export const projectList:Partial<Project>[] = [
     {
         id:"001",
         title:"急急如律令，任意速速簽",

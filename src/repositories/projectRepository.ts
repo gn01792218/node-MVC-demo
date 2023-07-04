@@ -2,7 +2,7 @@ import { Project, ProjectEditReqquest } from '../models/project'
 import { IProjectRepository } from './IprojectRepository'
 import { projectList } from '../localData/projectList'
 export class ProjectRepository implements IProjectRepository{
-    projects:Project[]
+    projects:Partial<Project>[]
     constructor(){
         this.projects = projectList
     }
@@ -13,7 +13,7 @@ export class ProjectRepository implements IProjectRepository{
         return this.projects.find(p => p.id === id)
     }
 
-    add(project:Project){
+    add(project:Partial<Project>){
         this.projects.push(project)
         return {
             project,

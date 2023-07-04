@@ -1,9 +1,9 @@
 import { Project, ProjectCRUDResponse, ProjectEditReqquest } from '../models/project'
 export interface IProjectRepository{
-    projects:Project[],
-    getAll:()=> Project[]
-    getById:(id:string) => Project | undefined
-    add:(project:Project) => ProjectCRUDResponse
+    projects:Partial<Project>[],
+    getAll:()=> Partial<Project>[]
+    getById:(id:string) => Partial<Project> | undefined
+    add:(project:Partial<Project>) => ProjectCRUDResponse
     edit:(id:string, editProject:ProjectEditReqquest) => ProjectCRUDResponse
     delete:(id:string) => ProjectCRUDResponse
 }

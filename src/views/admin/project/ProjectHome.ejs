@@ -1,6 +1,7 @@
 <% contentFor('body') %>
+    <h1>project Home</h1>
     <h1>專案名單 : </h1>
-    <p><%= projects.length %></p>
+    <p>專案數量 : <%= projects.length %></p>
 
     <% if(projects.length>0) {%>
         <% for(project of projects) {%>
@@ -9,4 +10,5 @@
     <% } else {%>
         <p>目前無專案</p>
     <%}%>
+    <a href="/admin/project/createProject">Create Project</a>
 
