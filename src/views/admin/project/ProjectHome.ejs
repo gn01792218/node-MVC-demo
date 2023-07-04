@@ -5,7 +5,7 @@
 
     <% if(projects.length>0) {%>
         <% for(project of projects) {%>
-            <p><%= project.title%></p>
+            <%- include('../../components/projectCard.ejs',{ project }) %>
         <% }%>
     <% } else {%>
         <p>目前無專案</p>

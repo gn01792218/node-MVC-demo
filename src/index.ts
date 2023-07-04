@@ -17,6 +17,7 @@ app.use(ejsLayouts)
 
 app.use(express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
 app.use('/admin/user',express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
+app.use('/admin/project',express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
