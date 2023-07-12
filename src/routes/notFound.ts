@@ -2,7 +2,7 @@
 import { Router } from 'express'
 import { 
     getNotFoundPage,
-} from '../controllers/errorController'
+} from '../controllers/errorController.js'
 
 const router = Router()
 

@@ -1,6 +1,6 @@
 //引入modles和repositpry
-import { Project } from "../models/project";
-import { ProjectRepository } from "../repositories/projectRepository";
+import { Project } from "../models/project.js";
+import { ProjectRepository } from "../repositories/projectRepository.js";
 import { Request, Response } from "express";
 
 //初始化

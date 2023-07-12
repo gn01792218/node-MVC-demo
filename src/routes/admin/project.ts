@@ -6,7 +6,7 @@ import {
     postEditPage,
     postCreateProjectPage,
     deleteProject
-} from'../../controllers/projectController'
+} from'../../controllers/projectController.js'
 
 const router = Router()
 

@@ -1,4 +1,4 @@
-import { Project, ProjectCRUDResponse, ProjectEditReqquest } from '../models/project'
+import { Project, ProjectCRUDResponse, ProjectEditReqquest } from '../models/project.js'
 export interface IProjectRepository{
     projects:Partial<Project>[],
     getAll:()=> Partial<Project>[]

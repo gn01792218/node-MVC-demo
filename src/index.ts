@@ -1,13 +1,14 @@
 
 import express from 'express'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import ejsLayouts from 'express-ejs-layouts'
-import indexRoute from './routes'
-import adminRoute from './routes/admin/admin'
-import userRoute from './routes/admin/user'
-import projectRoute from './routes/admin/project'
-import notFountRoute from './routes/notFound'
-
+import indexRoute from './routes/index.js'
+import adminRoute from './routes/admin/admin.js'
+import userRoute from './routes/admin/user.js'
+import projectRoute from './routes/admin/project.js'
+import notFountRoute from './routes/notFound.js'
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app = express()
 const port = process.env.PORT || 3000
 app.set('view engine','ejs')

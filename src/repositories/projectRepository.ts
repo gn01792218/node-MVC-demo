@@ -1,6 +1,6 @@
-import { Project, ProjectEditReqquest } from '../models/project'
-import { IProjectRepository } from './IprojectRepository'
-import { projectList } from '../localData/projectList'
+import { Project, ProjectEditReqquest } from '../models/project.js'
+import { IProjectRepository } from './IprojectRepository.js'
+import { projectList } from '../localData/projectList.js'
 export class ProjectRepository implements IProjectRepository{
     projects:Partial<Project>[]
     constructor(){

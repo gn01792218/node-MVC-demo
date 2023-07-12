@@ -1,5 +1,5 @@
-import { User } from "../models/user";
-import { IUserRepository } from "./IuserRepository";
+import { User } from "../models/user.js";
+import { IUserRepository } from "./IuserRepository.js";
 
 export class UserRepository implements IUserRepository{
     users:User[]
