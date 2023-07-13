@@ -1,5 +1,5 @@
 //引入modles和repositpry
-import { Project } from "../models/project.js";
+import { Project } from "../types/project.js";
 import { ProjectRepository } from "../repositories/projectRepository.js";
 import { Request, Response } from "express";
 

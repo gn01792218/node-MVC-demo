@@ -1,4 +1,4 @@
-import { Project, ProjectEditReqquest } from '../models/project.js'
+import { Project, ProjectEditReqquest } from '../types/project.js'
 import { IProjectRepository } from './IprojectRepository.js'
 import { projectList } from '../localData/projectList.js'
 export class ProjectRepository implements IProjectRepository{
@@ -28,9 +28,9 @@ export class ProjectRepository implements IProjectRepository{
             project.imgs = editProject.imgs
             project.tags = editProject.tags
             project.repoUrl = editProject.repoUrl
-            project.projectFeatureDescription = editProject.projectFeatureDescription
-            project.projectTechnologyDescription = editProject.projectTechnologyDescription
-            project.projectFutureDescription = editProject.projectFutureDescription
+            project.featureDescription = editProject.projectFeatureDescription
+            project.technologyDescription = editProject.projectTechnologyDescription
+            project.futureDescription = editProject.projectFutureDescription
         }
         return {
             project,

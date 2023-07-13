@@ -1,5 +1,5 @@
 //引入modles和repositpry
-import { User } from '../models/user.js'
+import { User } from '../types/user.js'
 import { UserRepository } from "../repositories/userReposiitory.js"
 import { Request, Response } from 'express'
 

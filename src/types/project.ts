@@ -1,16 +1,18 @@
+import { UUID } from "crypto";
+
 export interface Project {
-  id: string;
+  id: UUID;
   title: string;
   demoUrl: string;
   imgs: string[];
   tags: string[];
   repoUrl: string;
-  projectFeatureDescription: string;
-  projectTechnologyDescription: string;
-  projectFutureDescription: string;
+  featureDescription: string;
+  technologyDescription: string;
+  futureDescription: string;
 }
 export interface ProjectEditReqquest{
-  id: string;
+  id: UUID;
   title: string;
   demoUrl: string;
   imgs: string[];

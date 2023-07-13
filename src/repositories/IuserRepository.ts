@@ -1,4 +1,4 @@
-import { User } from '../models/user.js'
+import { User } from '../types/user.js'
 export interface IUserRepository{
     users:User[],
     add:(user:User) => void
