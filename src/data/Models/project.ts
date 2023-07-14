@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from "../database.js";
 export default db.define("Product", {
   id: {
