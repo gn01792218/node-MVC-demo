@@ -3,7 +3,9 @@
 <%- include('../components/head.ejs') %>
 <body>
     <a href="/"><h1>Node.js 簡單CRUD 示範</h1></a>
-    <%- include('../components/adminHeader.ejs')%>
+    <% if(isLogin === true){%>
+        <%- include('../components/adminHeader.ejs')%>
+    <%}%>
     <%- body %>
 </body>
 </html>

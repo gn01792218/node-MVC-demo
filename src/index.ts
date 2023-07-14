@@ -20,13 +20,17 @@ app.set('layout','layouts/layout') //因為我們要將layout檔案，放置於l
 app.use(ejsLayouts)
 
 app.use(express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
+app.use('/admin',express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
 app.use('/admin/user',express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
 app.use('/admin/project',express.static(path.join(__dirname,'..','public'))) //設定靜態資料夾為public
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
+
+
+//路由
 app.use(indexRoute)
-app.use(adminRoute)
+app.use('/admin',adminRoute)
 app.use('/admin/user',userRoute)
 app.use('/admin/project',projectRoute)
 app.use(notFountRoute)

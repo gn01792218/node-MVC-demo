@@ -1,6 +1,6 @@
 import { User } from '../types/user.js'
+import { Optional } from 'sequelize'
 export interface IUserRepository{
-    users:User[],
-    add:(user:User) => void
-    getAll:()=> User[]
+    // add:(user:User) => void
+    // getAll:()=> Promise<Optional<User, 'id'>[]>
 }

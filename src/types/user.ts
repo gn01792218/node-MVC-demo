@@ -4,6 +4,11 @@ export interface User{
     id:UUID
     name:string
     account:string
-    passward:string
+    password:string
     email:string
+}
+
+export interface UserLoginRequest{
+    account:string,
+    password:string
 }

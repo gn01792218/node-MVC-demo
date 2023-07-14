@@ -1,10 +1,10 @@
 
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import { getLoginPage, postLogin, getAdminHomePage } from '../../controllers/adminController.js'
 
 const router = Router()
-
-router.get('/admin', (req:Request, res:Response) => {
-    res.render('admin/index',{pageTitle:'ADMIN首頁',layout:'layouts/adminLayout'})
-})
+router.get('/login',getLoginPage)
+router.post('/login', postLogin)
+router.get('/', getAdminHomePage)
 
 export default router

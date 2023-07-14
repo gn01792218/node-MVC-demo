@@ -1,4 +1,3 @@
-
 import db from "../database.js";
 import { DataTypes } from "sequelize";
 export default db.define("User", {
@@ -15,7 +14,7 @@ export default db.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  passward:{
+  password:{
     type: DataTypes.STRING,
     allowNull: false,
   },

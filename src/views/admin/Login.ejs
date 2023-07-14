@@ -1,0 +1,13 @@
+<% contentFor('body') %>
+    <h1>Admin使用者登入 </h1>
+     <form action="/admin/login" method="post">
+        <div>
+            <label for="account">account</label>
+            <input type="text" name="account" id="account">
+        </div>
+        <div>
+            <label for="password">password</label>
+            <input type="text" name="password" id="password">
+        </div>
+        <button type="submit">送出</button>
+    </form>

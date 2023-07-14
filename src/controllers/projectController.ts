@@ -2,12 +2,14 @@
 import { Project } from "../types/project.js";
 import { ProjectRepository } from "../repositories/projectRepository.js";
 import { Request, Response } from "express";
+import { isLogin } from './adminController.js'
 
 //初始化
 const projectRepository = new ProjectRepository();
 
 export const getProjectHomePage = (req: Request, res: Response) => {
   res.render("admin/project/ProjectHome", {
+    isLogin,
     pageTitle: "ProjectHome",
     projects: projectRepository.getAll(),
     layout: "layouts/adminLayout",
@@ -16,6 +18,7 @@ export const getProjectHomePage = (req: Request, res: Response) => {
 
 export const getCreateProjectPage = (req: Request, res: Response) => {
   res.render("admin/project/CreateProject", {
+    isLogin,
     pageTitle: "CreateProject",
     layout: "layouts/adminLayout",
   });
@@ -32,7 +35,7 @@ export const postCreateProjectPage = (req: Request, res: Response) => {
 
 export const getEditPage = (req: Request, res: Response) => {
   const project = projectRepository.getById(req.params.id)
-  res.render("admin/project/Edit",{pageTitle:"Edit",layout:"layouts/adminLayout",project})
+  res.render("admin/project/Edit",{isLogin,pageTitle:"Edit",layout:"layouts/adminLayout",project})
 };
 
 export const postEditPage = (req: Request, res: Response) => {
