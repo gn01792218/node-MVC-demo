@@ -1,22 +1,29 @@
-import { User } from "../types/user.js";
+import { User,AddUserRequest } from "../types/user.js";
+import UserModel from '../data/Models/user.js'
 import { IUserRepository } from "./IuserRepository.js";
-import Users from "../data/Models/user.js";
 import { Optional, WhereOptions } from "sequelize";
-import { UUID } from "crypto";
+import {  randomUUID, UUID } from "crypto";
 export class UserRepository implements IUserRepository {
-  add(user: Optional<User, "id">) {
-    Users.create(user);
+  add(addUser:AddUserRequest ) {
+    UserModel.create({
+        id:randomUUID(),
+        name:addUser.name,
+        account:addUser.account,
+        password:addUser.password,
+        email:addUser.email,
+        isLogin:false
+    }) 
   }
   async getAll() {
-    return await Users.findAll();
+    return await UserModel.findAll();
   }
   async getByWhere(where: WhereOptions<User>) {
-    return await Users.findOne({
-      where: where,
+    return await UserModel.findOne({
+      where,
     });
   }
   async getById(id: UUID) {
-    return await Users.findByPk(id);
+    return await UserModel.findByPk(id);
   }
   async update(updateuser: Optional<User, "id">) {
     const user = await this.getById(updateuser.id as UUID);

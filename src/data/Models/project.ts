@@ -1,10 +1,8 @@
 import db from "../database.js";
 import { Project } from '../../types/project.js'
-import { DataTypes, Model, Optional} from "sequelize";
+import { DataTypes } from "sequelize";
 
-interface UserCreationAttributes extends Optional<Project, "id">{}
-interface ProjectModel extends Model<Project, UserCreationAttributes>, Project{}
-export default db.define<ProjectModel>("Product", {
+export default db.define<Project>("Product", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,

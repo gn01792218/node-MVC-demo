@@ -1,11 +1,8 @@
 import db from "../database.js";
 import { User } from '../../types/user.js'
-import { DataTypes, Model, Optional} from "sequelize";
+import { DataTypes} from "sequelize";
 
-interface UserCreationAttributes extends Optional<User, "id">{}
-interface UserModel extends Model<User, UserCreationAttributes>, User{}
-
-export default db.define<UserModel>("User", {
+export default db.define<User>("User", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,

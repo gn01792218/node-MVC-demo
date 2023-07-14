@@ -1,6 +1,7 @@
 import { UUID } from "crypto";
 
-export interface Project {
+import { Model, InferAttributes, InferCreationAttributes} from "sequelize";
+export interface Project extends Model<InferAttributes<Project>, InferCreationAttributes<Project>>{
   id: UUID;
   title: string;
   demoUrl: string;
