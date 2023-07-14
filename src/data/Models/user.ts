@@ -1,6 +1,11 @@
 import db from "../database.js";
-import { DataTypes } from "sequelize";
-export default db.define("User", {
+import { User } from '../../types/user.js'
+import { DataTypes, Model, Optional} from "sequelize";
+
+interface UserCreationAttributes extends Optional<User, "id">{}
+interface UserModel extends Model<User, UserCreationAttributes>, User{}
+
+export default db.define<UserModel>("User", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -21,5 +26,10 @@ export default db.define("User", {
   email:{
     type: DataTypes.STRING,
     allowNull: false
+  },
+  isLogin:{
+    type: DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false
   }
 });

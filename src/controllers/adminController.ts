@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { UserLoginRequest } from "../types/user.js";
 import User from "../data/Models/user.js";
+import { UserRepository } from "../repositories/userReposiitory.js";
 
+const userReposiitory = new UserRepository()
 export let isLogin = false;
 
 export const getLoginPage = (req: Request, res: Response) => {
@@ -28,9 +30,7 @@ export const getAdminHomePage = (req: Request, res: Response) => {
 export const postLogin = async (req: Request, res: Response) => {
   const { account, password }: UserLoginRequest = req.body;
 
-  const user = await User.findOne({
-    where: { account, password },
-  });
+  const user = await userReposiitory.getByWhere({account, password})
 
   if (!user) {
     //找不到回登入頁
@@ -42,6 +42,7 @@ export const postLogin = async (req: Request, res: Response) => {
   }
 
   isLogin = true;
+  
   res.status(200).render("admin", {
     isLogin,
     pageTitle: "Admin首頁",

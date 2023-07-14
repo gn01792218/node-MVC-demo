@@ -6,6 +6,7 @@ export interface User{
     account:string
     password:string
     email:string
+    isLogin?:boolean
 }
 
 export interface UserLoginRequest{
