@@ -2,7 +2,7 @@ import db from "../database.js";
 import { User } from '../../types/user.js'
 import { DataTypes} from "sequelize";
 
-export default db.define<User>("User", {
+const UserModel = db.define<User>("User", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -30,3 +30,5 @@ export default db.define<User>("User", {
     defaultValue:false
   }
 });
+
+export default UserModel

@@ -1,18 +1,18 @@
-import { User,AddUserRequest } from "../types/user.js";
-import UserModel from '../data/Models/user.js'
+import { User, AddUserRequest } from "../types/user.js";
+import UserModel from "../data/Models/user.js";
 import { IUserRepository } from "./IuserRepository.js";
 import { Optional, WhereOptions } from "sequelize";
-import {  randomUUID, UUID } from "crypto";
+import { randomUUID, UUID } from "crypto";
 export class UserRepository implements IUserRepository {
-  add(addUser:AddUserRequest ) {
+  add(addUser: AddUserRequest) {
     UserModel.create({
-        id:randomUUID(),
-        name:addUser.name,
-        account:addUser.account,
-        password:addUser.password,
-        email:addUser.email,
-        isLogin:false
-    }) 
+      id: randomUUID(),
+      name: addUser.name,
+      account: addUser.account,
+      password: addUser.password,
+      email: addUser.email,
+      isLogin: false,
+    });
   }
   async getAll() {
     return await UserModel.findAll();

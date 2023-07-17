@@ -1,9 +1,8 @@
-import { Project, ProjectCRUDResponse, ProjectEditReqquest } from '../types/project.js'
+import { Project, ProjectCRUDResponse, ProjectCreateRequest, ProjectEditRequest } from '../types/project.js'
 export interface IProjectRepository{
-    projects:Partial<Project>[],
-    getAll:()=> Partial<Project>[]
-    getById:(id:string) => Partial<Project> | undefined
-    add:(project:Partial<Project>) => ProjectCRUDResponse
-    edit:(editProject:ProjectEditReqquest) => ProjectCRUDResponse
-    delete:(id:string) => ProjectCRUDResponse
+    getAll:()=> Promise<Project[]>
+    getById:(id:string) => Promise<Project | null>
+    add:(project:ProjectCreateRequest) => Promise<ProjectCRUDResponse>
+    edit:(editProject:ProjectEditRequest) => Promise<ProjectCRUDResponse>
+    delete:(id:string) => Promise<ProjectCRUDResponse>
 }

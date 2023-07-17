@@ -7,11 +7,11 @@ import { isLogin } from './adminController.js'
 //初始化
 const projectRepository = new ProjectRepository();
 
-export const getProjectHomePage = (req: Request, res: Response) => {
+export const getProjectHomePage = async(req: Request, res: Response) => {
   res.render("admin/project/ProjectHome", {
     isLogin,
     pageTitle: "ProjectHome",
-    projects: projectRepository.getAll(),
+    projects: await projectRepository.getAll(),
     layout: "layouts/adminLayout",
   });
 };
@@ -24,26 +24,22 @@ export const getCreateProjectPage = (req: Request, res: Response) => {
   });
 };
 
-export const postCreateProjectPage = (req: Request, res: Response) => {
-  const project: Partial<Project> = {
-    id: Math.random().toString(),
-    ...req.body,
-  };
-  projectRepository.add(project);
+export const postCreateProjectPage = async(req: Request, res: Response) => {
+  await projectRepository.add(req.body);
   res.redirect("/admin/project");
 };
 
-export const getEditPage = (req: Request, res: Response) => {
-  const project = projectRepository.getById(req.params.id)
+export const getEditPage = async(req: Request, res: Response) => {
+  const project =await projectRepository.getById(req.params.id)
   res.render("admin/project/Edit",{isLogin,pageTitle:"Edit",layout:"layouts/adminLayout",project})
 };
 
-export const postEditPage = (req: Request, res: Response) => {
-  projectRepository.edit(req.body)
+export const postEditPage = async(req: Request, res: Response) => {
+  await projectRepository.edit(req.body)
   res.redirect("/admin/project");
 };
 
-export const deleteProject = (req: Request, res: Response) => {
-  projectRepository.delete(req.params.id);
+export const deleteProject = async(req: Request, res: Response) => {
+  await projectRepository.delete(req.params.id);
   res.redirect("/admin/project");
 };

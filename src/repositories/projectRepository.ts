@@ -1,48 +1,58 @@
-import { Project, ProjectEditReqquest } from '../types/project.js'
+import { randomUUID } from 'crypto'
+import { ProjectCreateRequest, ProjectEditRequest } from '../types/project.js'
 import { IProjectRepository } from './IprojectRepository.js'
-import { projectList } from '../localData/projectList.js'
+import UserModel from '../data/Models/user.js'
+import ProjectModal from '../data/Models/project.js'
 export class ProjectRepository implements IProjectRepository{
-    projects:Partial<Project>[]
-    constructor(){
-        this.projects = projectList
+    async getAll(){
+        return await ProjectModal.findAll()
     }
-    getAll(){
-        return this.projects
+    async getById(id:string){
+        return await ProjectModal.findByPk(id)
     }
-    getById(id:string){
-        return this.projects.find(p => p.id === id)
-    }
-
-    add(project:Partial<Project>){
-        this.projects.push(project)
+    async add(project:ProjectCreateRequest){
+        const createProject =await ProjectModal.create({
+            id:randomUUID(),
+            title:project.title,
+            demoUrl:project.demoUrl,
+            imgs:project.imgs,
+            tags:project.tags,
+            repoUrl:project.repoUrl,
+            featureDescription:project.featureDescription,
+            technologyDescription:project.technologyDescription,
+            futureDescription:project.futureDescription,
+        })
         return {
-            project,
-            projects:this.getAll()
+            project:createProject,
+            projects:await this.getAll()
         }
     }
-    edit(editProject:ProjectEditReqquest){
-        const project = this.getById(editProject.id)
+    async edit(editProject:ProjectEditRequest){
+        const project =await this.getById(editProject.id)
         if(project){
             project.title = editProject.title
             project.demoUrl = editProject.demoUrl
             project.imgs = editProject.imgs
             project.tags = editProject.tags
             project.repoUrl = editProject.repoUrl
-            project.featureDescription = editProject.projectFeatureDescription
-            project.technologyDescription = editProject.projectTechnologyDescription
-            project.futureDescription = editProject.projectFutureDescription
+            project.featureDescription = editProject.featureDescription
+            project.technologyDescription = editProject.technologyDescription
+            project.futureDescription = editProject.futureDescription
+            await project.save()
         }
         return {
             project,
-            projects:this.getAll()
+            projects:await this.getAll()
         }
     }
-    delete(id:string){
-        const project = this.getById(id)
-        this.projects = this.projects.filter(p => p.id!==id)
+    async delete(id:string){
+        const project =await this.getById(id)
+        if(project){
+            await project.destroy()
+        }
         return {
             project,
-            projects:this.getAll()
+            projects:await this.getAll()
         }
     }
 }

@@ -8,8 +8,8 @@ import userRoute from "./routes/admin/user.js";
 import projectRoute from "./routes/admin/project.js";
 import notFountRoute from "./routes/notFound.js";
 import db from "./data/database.js";
-import User from "./data/Models/user.js";
-import Project from "./data/Models/project.js";
+import UserModel from "./data/Models/user.js";
+import ProjectModel from "./data/Models/project.js";
 import { projectList } from "./localData/projectList.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,9 +35,9 @@ app.use("/admin/user", userRoute);
 app.use("/admin/project", projectRoute);
 app.use(notFountRoute);
 
-//建立資料庫關聯
-User.hasMany(Project);
-Project.belongsTo(User, {
+//建立關聯
+UserModel.hasMany(ProjectModel);
+ProjectModel.belongsTo(UserModel, {
   constraints: true,
   onDelete: "CASCADE",
 });

@@ -2,7 +2,7 @@ import db from "../database.js";
 import { Project } from '../../types/project.js'
 import { DataTypes } from "sequelize";
 
-export default db.define<Project>("Product", {
+const ProjectModel =  db.define<Project>("Product", {
   id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -26,5 +26,8 @@ export default db.define<Project>("Product", {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
     defaultValue: [],
-  },
+  }
 });
+
+export default ProjectModel
+
