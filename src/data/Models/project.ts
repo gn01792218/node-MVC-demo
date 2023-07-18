@@ -26,6 +26,10 @@ const ProjectModel =  db.define<Project>("Product", {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
     defaultValue: [],
+  },
+  userId:{
+    type:DataTypes.UUID,
+    allowNull:true
   }
 });
 

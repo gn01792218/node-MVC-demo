@@ -12,6 +12,7 @@ export interface Project
   featureDescription: string;
   technologyDescription: string;
   futureDescription: string;
+  userId:UUID
 }
 export interface ProjectCreateRequest {
   title: string;

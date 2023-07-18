@@ -36,8 +36,12 @@ app.use("/admin/project", projectRoute);
 app.use(notFountRoute);
 
 //建立關聯
-UserModel.hasMany(ProjectModel);
+UserModel.hasMany(ProjectModel,{
+  sourceKey:'id', //預設其實就會抓取UserModel的PK來當SourceKey
+  foreignKey:'userId', //將此Model的PK和Project的userId做關聯
+});
 ProjectModel.belongsTo(UserModel, {
+  foreignKey:'userId',
   constraints: true,
   onDelete: "CASCADE",
 });

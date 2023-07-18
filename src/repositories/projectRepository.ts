@@ -1,8 +1,8 @@
-import { randomUUID } from 'crypto'
+import { UUID, randomUUID } from 'crypto'
 import { ProjectCreateRequest, ProjectEditRequest } from '../types/project.js'
 import { IProjectRepository } from './IprojectRepository.js'
-import UserModel from '../data/Models/user.js'
 import ProjectModal from '../data/Models/project.js'
+import { adminUser } from '../controllers/adminController.js'
 export class ProjectRepository implements IProjectRepository{
     async getAll(){
         return await ProjectModal.findAll()
@@ -11,6 +11,7 @@ export class ProjectRepository implements IProjectRepository{
         return await ProjectModal.findByPk(id)
     }
     async add(project:ProjectCreateRequest){
+        console.log(adminUser)
         const createProject =await ProjectModal.create({
             id:randomUUID(),
             title:project.title,
@@ -21,6 +22,7 @@ export class ProjectRepository implements IProjectRepository{
             featureDescription:project.featureDescription,
             technologyDescription:project.technologyDescription,
             futureDescription:project.futureDescription,
+            userId:adminUser?.id as UUID
         })
         return {
             project:createProject,

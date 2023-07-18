@@ -1,13 +1,12 @@
 //引入modles和repositpry
-import { Project } from "../types/project.js";
 import { ProjectRepository } from "../repositories/projectRepository.js";
 import { Request, Response } from "express";
-import { isLogin } from './adminController.js'
+import { isLogin, adminUser } from "./adminController.js";
 
 //初始化
 const projectRepository = new ProjectRepository();
 
-export const getProjectHomePage = async(req: Request, res: Response) => {
+export const getProjectHomePage = async (req: Request, res: Response) => {
   res.render("admin/project/ProjectHome", {
     isLogin,
     pageTitle: "ProjectHome",
@@ -17,6 +16,13 @@ export const getProjectHomePage = async(req: Request, res: Response) => {
 };
 
 export const getCreateProjectPage = (req: Request, res: Response) => {
+  if (!adminUser) {
+    return res.render("admin/Login", {
+      isLogin,
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
   res.render("admin/project/CreateProject", {
     isLogin,
     pageTitle: "CreateProject",
@@ -24,22 +30,55 @@ export const getCreateProjectPage = (req: Request, res: Response) => {
   });
 };
 
-export const postCreateProjectPage = async(req: Request, res: Response) => {
+export const postCreateProjectPage = async (req: Request, res: Response) => {
+if (!adminUser) {
+    return res.render("admin/Login", {
+      isLogin,
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
   await projectRepository.add(req.body);
   res.redirect("/admin/project");
 };
 
-export const getEditPage = async(req: Request, res: Response) => {
-  const project =await projectRepository.getById(req.params.id)
-  res.render("admin/project/Edit",{isLogin,pageTitle:"Edit",layout:"layouts/adminLayout",project})
+export const getEditPage = async (req: Request, res: Response) => {
+  if (!adminUser) {
+    return res.render("admin/Login", {
+      isLogin,
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
+  const project = await projectRepository.getById(req.params.id);
+  res.render("admin/project/Edit", {
+    isLogin,
+    pageTitle: "Edit",
+    layout: "layouts/adminLayout",
+    project,
+  });
 };
 
-export const postEditPage = async(req: Request, res: Response) => {
-  await projectRepository.edit(req.body)
+export const postEditPage = async (req: Request, res: Response) => {
+  if (!adminUser) {
+    return res.render("admin/Login", {
+      isLogin,
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
+  await projectRepository.edit(req.body);
   res.redirect("/admin/project");
 };
 
-export const deleteProject = async(req: Request, res: Response) => {
+export const deleteProject = async (req: Request, res: Response) => {
+  if (!adminUser) {
+    return res.render("admin/Login", {
+      isLogin,
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
   await projectRepository.delete(req.params.id);
   res.redirect("/admin/project");
 };

@@ -41,6 +41,7 @@ export const postLogin = async (req: Request, res: Response) => {
   }
 
   isLogin = true;
+  adminUser = user
   res.status(200).render("admin", {
     isLogin,
     pageTitle: "Admin首頁",
