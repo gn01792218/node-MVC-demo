@@ -3,10 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import ejsLayouts from "express-ejs-layouts";
 import indexRoute from "./routes/index.js";
-import adminRoute from "./routes/admin/admin.js";
-import userRoute from "./routes/admin/user.js";
-import projectRoute from "./routes/admin/project.js";
-import notFountRoute from "./routes/notFound.js";
+
 import db from "./data/database.js";
 import UserModel from "./data/Models/user.js";
 import ProjectModel from "./data/Models/project.js";
@@ -21,19 +18,12 @@ app.set("layout", "layouts/layout"); //因為我們要將layout檔案，放置�
 app.use(ejsLayouts);
 
 app.use(express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
-app.use("/admin", express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
-app.use("/admin/user", express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
-app.use("/admin/project", express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //路由
 app.use(indexRoute);
-app.use("/admin", adminRoute);
-app.use("/admin/user", userRoute);
-app.use("/admin/project", projectRoute);
-app.use(notFountRoute);
 
 //建立關聯
 UserModel.hasMany(ProjectModel,{
