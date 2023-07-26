@@ -3,9 +3,12 @@ import { ProjectCreateRequest, ProjectEditRequest } from '../types/project.js'
 import { IProjectRepository } from './IprojectRepository.js'
 import ProjectModal from '../data/Models/project.js'
 import { adminUser } from '../controllers/adminController.js'
+import UserModel  from '../data/Models/user.js'
 export class ProjectRepository implements IProjectRepository{
     async getAll(){
-        return await ProjectModal.findAll()
+        return  await ProjectModal.findAll({
+            include:UserModel
+        })
     }
     async getById(id:string){
         return await ProjectModal.findByPk(id)
