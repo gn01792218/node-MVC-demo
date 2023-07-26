@@ -18,9 +18,10 @@ app.set("layout", "layouts/layout"); //因為我們要將layout檔案，放置�
 app.use(ejsLayouts);
 
 app.use(express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//tailwindCss設置
 
 //路由
 app.use(indexRoute);

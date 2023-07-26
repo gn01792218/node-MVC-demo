@@ -5,6 +5,47 @@ npm run dev
 # 為專案加上Typescript
 參考我的notion筆記 : <br>
 https://www.notion.so/Node-js-Typscript-83c15175fb1f45c7afc23a22653a1aba
+# 為專案加上Tailwindcss
+- 安裝 <br>
+其中postcss和postcss-cli是為了要編譯tailwindcss檔案
+```
+npm i tailwindcss autoprefixer postcss postcss-cli
+```
+- 撰寫tailwind.config.js檔案
+```javascript
+export default {
+  content: ["./src/**/*.ejs"],
+  theme: {
+    extend: {}, 
+  },
+  plugins: [],
+}
+```
+- 撰寫postcss.config.cjs
+```javascript
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  }
+}
+```
+- 新增tailwindcss入口文件<br>
+新增位置 : public/style/tailwind.css<br>
+並引入三個tailwindcss的工具
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+- 編寫package.json<br>
+-o前是要進行編譯的目標文件，-o後是編譯輸出的文件( 專案模板中要引用的是這個 )
+```
+"tailwind": "postcss public/style/tailwind.css -o public/style/style.css --watch",
+```
+- 使用
+1.下 npm run tailwind 會即時編譯css文件，重整網頁就可以看見
 # MVC 框架
 - controller + routers <br>
 routers 應該只負責控制 router；
