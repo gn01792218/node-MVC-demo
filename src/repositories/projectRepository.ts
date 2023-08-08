@@ -2,8 +2,8 @@ import { UUID, randomUUID } from 'crypto'
 import { ProjectCreateRequest, ProjectEditRequest } from '../types/project.js'
 import { IProjectRepository } from './IprojectRepository.js'
 import ProjectModal from '../data/Models/project.js'
-import { adminUser } from '../controllers/adminController.js'
-import UserModel  from '../data/Models/user.js'
+import { User }  from '../types/user.js'
+import UserModel from '../data/Models/user.js'
 export class ProjectRepository implements IProjectRepository{
     async getAll(){
         return  await ProjectModal.findAll({
@@ -13,8 +13,7 @@ export class ProjectRepository implements IProjectRepository{
     async getById(id:string){
         return await ProjectModal.findByPk(id)
     }
-    async add(project:ProjectCreateRequest){
-        console.log(adminUser)
+    async add(project:ProjectCreateRequest, adminUser:User){
         const createProject =await ProjectModal.create({
             id:randomUUID(),
             title:project.title,

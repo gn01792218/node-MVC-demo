@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import session from 'express-session'
 import { fileURLToPath } from "url";
 import ejsLayouts from "express-ejs-layouts";
 import indexRoute from "./routes/index.js";
@@ -7,6 +8,7 @@ import indexRoute from "./routes/index.js";
 import db from "./data/database.js";
 import UserModel from "./data/Models/user.js";
 import ProjectModel from "./data/Models/project.js";
+import { User } from './types/user.js'
 import { projectList } from "./localData/projectList.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -20,8 +22,18 @@ app.use(ejsLayouts);
 app.use(express.static(path.join(__dirname, "..", "public"))); //設定靜態資料夾為public
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-//tailwindCss設置
+//session設置
+declare module 'express-session' {
+    interface SessionData{
+        isLogin:boolean,
+        user:User
+    }
+}
+app.use(session({
+  secret:'my project back end',
+  resave:false,
+  saveUninitialized:false
+}))
 
 //路由
 app.use(indexRoute);
