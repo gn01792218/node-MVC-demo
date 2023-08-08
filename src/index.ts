@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import session from 'express-session'
+import sessionPgConnect from 'connect-pg-simple'
 import { fileURLToPath } from "url";
 import ejsLayouts from "express-ejs-layouts";
 import indexRoute from "./routes/index.js";
@@ -10,6 +11,9 @@ import UserModel from "./data/Models/user.js";
 import ProjectModel from "./data/Models/project.js";
 import { User } from './types/user.js'
 import { projectList } from "./localData/projectList.js";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -29,10 +33,16 @@ declare module 'express-session' {
         user:User
     }
 }
+//製作postgresqlStore
+const PostgresqlStore = sessionPgConnect(session)
+const sessionStore = new PostgresqlStore({
+  conString:process.env.DB_CONNECTION_STRING
+})
 app.use(session({
   secret:'my project back end',
   resave:false,
-  saveUninitialized:false
+  saveUninitialized:false,
+  store:sessionStore
 }))
 
 //路由
