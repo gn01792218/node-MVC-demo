@@ -7,6 +7,7 @@ const userReposiitory = new UserRepository()
 export const getAdminHomePage = (req: Request, res: Response) => {
   if (!res.locals.isLogin) {
     return res.render("admin/Login", {
+      serverMsg:'',
       pageTitle: "AdminLogin",
       layout: "layouts/adminLayout",
     });
@@ -19,6 +20,7 @@ export const getAdminHomePage = (req: Request, res: Response) => {
 export const getLoginPage = (req: Request, res: Response) => {
   if(res.locals.isLogin) return res.redirect('/admin')
   res.render("admin/Login", {
+    serverMsg:'',
     pageTitle: "AdminLogin",
     layout: "layouts/adminLayout",
   });
@@ -26,15 +28,25 @@ export const getLoginPage = (req: Request, res: Response) => {
 export const postLogin = async (req: Request, res: Response) => {
   const { account, password }: UserLoginRequest = req.body;
   const user = await userReposiitory.getByWhere({account})
-  const vaildPwd = await bcrypt.compare(password, user?.password!)
-  if (!vaildPwd) {
+  if (!user) {
+    req.flash('error','找不到該帳號')
     //找不到回登入頁
     return res.render("admin/Login", {
+      serverMsg:req.flash('error'),
       pageTitle: "AdminLogin",
       layout: "layouts/adminLayout",
     });
   }
-  
+  const vaildPwd = await bcrypt.compare(password, user?.password!)
+  if(!vaildPwd){
+    req.flash('error','密碼錯誤')
+    //找不到回登入頁
+    return res.render("admin/Login", {
+      serverMsg:req.flash('error'),
+      pageTitle: "AdminLogin",
+      layout: "layouts/adminLayout",
+    });
+  }
   req.session.isLogin = true
   req.session.user = user!
   req.session.save(()=>{
@@ -47,6 +59,7 @@ export const postLogout = (req:Request, res:Response) => {
 export const getSignupPage = (req: Request, res: Response) => {
   if(res.locals.isLogin) return res.redirect('/admin')
   res.render("admin/Signup", {
+    serverMsg:'',
     pageTitle: "AdminSignup",
     layout: "layouts/adminLayout",
   });
@@ -57,7 +70,9 @@ export const postSignup = async (req: Request, res: Response) => {
   const exsitUser = await userReposiitory.getByWhere({email, account})
   if(exsitUser) {
     //已經有人註冊過了，停留在註冊頁面
+    req.flash('error','此email或account已經有人註冊過了!')
     return res.render("admin/Signup", {
+      serverMsg:req.flash('error'),
       pageTitle: "AdminSignup",
       layout: "layouts/adminLayout",
     });

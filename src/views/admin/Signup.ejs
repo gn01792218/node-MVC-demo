@@ -1,5 +1,8 @@
 <% contentFor('body') %>
     <h1 class="page-title">Admin使用註冊 </h1>
+    <% if(serverMsg){ %>
+        <p class="error-msg"><%= serverMsg %></p>
+    <% } %>
      <form action="/admin/signup" method="post">
         <div>
             <label for="email">email</label>

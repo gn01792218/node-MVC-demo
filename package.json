@@ -15,6 +15,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.14",
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "connect-pg-simple": "^9.0.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/connect-flash": "^0.0.37",
     "@types/connect-pg-simple": "^7.0.0",
     "@types/ejs": "^3.1.2",
     "@types/express": "^4.17.17",
