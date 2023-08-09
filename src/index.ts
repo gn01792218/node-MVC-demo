@@ -5,6 +5,7 @@ import sessionPgConnect from 'connect-pg-simple'
 import { fileURLToPath } from "url";
 import ejsLayouts from "express-ejs-layouts";
 import indexRoute from "./routes/index.js";
+import { resLocalsStorage } from './middleware/resLocalsStorage.js'
 
 import db from "./data/database.js";
 import UserModel from "./data/Models/user.js";
@@ -46,6 +47,7 @@ app.use(session({
 }))
 
 //路由
+app.use(resLocalsStorage)
 app.use(indexRoute);
 
 //建立關聯

@@ -8,10 +8,10 @@ const userRepository = new UserRepository()
 
 export const getUserHomePage = async(req:Request, res:Response)=>{
     const users = await userRepository.getAll()
-    res.render('admin/UserHome',{isLogin:req.session.isLogin,pageTitle:"UserHome",users:users,layout:'layouts/adminLayout'})
+    res.render('admin/UserHome',{pageTitle:"UserHome",users:users,layout:'layouts/adminLayout'})
 }
 export const getAddUserPage = (req:Request, res:Response) => {
-    res.render('admin/AddUser',{isLogin:req.session.isLogin,pageTitle:"AddUser",layout:'layouts/adminLayout'})
+    res.render('admin/AddUser',{pageTitle:"AddUser",layout:'layouts/adminLayout'})
 }
 export const postAddUser = (req:Request, res:Response)=>{
     userRepository.add(req.body as AddUserRequest)
