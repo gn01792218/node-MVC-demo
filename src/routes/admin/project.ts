@@ -7,7 +7,6 @@ import {
     postCreateProjectPage,
     deleteProject
 } from'../../controllers/projectController.js'
-
 const router = Router()
 
 router.get('/', getProjectHomePage)
