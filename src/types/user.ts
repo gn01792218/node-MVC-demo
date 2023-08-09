@@ -10,7 +10,7 @@ export interface User extends Model<InferAttributes<User>, InferCreationAttribut
   isLogin:boolean
 }
 export interface AddUserRequest {
-  name:string
+  name?:string
   account:string
   password:string
   email:string

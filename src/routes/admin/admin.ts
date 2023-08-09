@@ -1,10 +1,23 @@
 
 import { Router } from 'express'
-import { getLoginPage, postLogin, getAdminHomePage } from '../../controllers/adminController.js'
+import { 
+    getSignupPage, 
+    postSignup, 
+    getLoginPage, 
+    postLogin, 
+    postLogout, 
+    getAdminHomePage 
+} from '../../controllers/adminController.js'
 
 const router = Router()
-router.get('/login',getLoginPage)
+router.get('/signup', getSignupPage)
+router.post('/signup', postSignup)
+
+router.get('/login', getLoginPage)
 router.post('/login', postLogin)
+
+router.post('/logout', postLogout)
+
 router.get('/', getAdminHomePage)
 
 export default router

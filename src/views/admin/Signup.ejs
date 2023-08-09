@@ -1,6 +1,10 @@
 <% contentFor('body') %>
-    <h1 class="page-title">Admin使用者登入 </h1>
-     <form action="/admin/login" method="post">
+    <h1 class="page-title">Admin使用註冊 </h1>
+     <form action="/admin/signup" method="post">
+        <div>
+            <label for="email">email</label>
+            <input type="email" name="email" id="email">
+        </div>
         <div>
             <label for="account">account</label>
             <input type="text" name="account" id="account">
@@ -11,4 +15,3 @@
         </div>
         <button type="submit">送出</button>
     </form>
-    <a href="/admin/signup">使用者註冊</a>

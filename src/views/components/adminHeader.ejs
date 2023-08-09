@@ -1,5 +1,17 @@
-<header>
-    <a href="/admin/project/">專案名單</a>
-    <a href="/admin/user/">使用者名單</a>
-    <a href="/admin/user/addUser">增加使用者</a>
+<header class="flex justify-between">
+    <% if( isLogin === true ){%>
+        <section>
+            <a href="/admin/project/">專案名單</a>
+            <a href="/admin/user/">使用者名單</a>
+            <a href="/admin/user/addUser">增加使用者</a>
+        </section>
+    <%}%>
+    <% if(isLogin === true) {%>
+        <form action="/admin/logout" method="post">
+            <button type="submit">登出</button>
+        </form>
+        <!-- <a href="/admin/logout">登出</a> -->
+    <%} else {%>
+        <a href="/admin/login">登入</a>
+    <% } %>
 </header>

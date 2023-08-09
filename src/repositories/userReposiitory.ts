@@ -4,10 +4,11 @@ import { IUserRepository } from "./IuserRepository.js";
 import { Optional, WhereOptions } from "sequelize";
 import { randomUUID, UUID } from "crypto";
 export class UserRepository implements IUserRepository {
-  add(addUser: AddUserRequest) {
-    UserModel.create({
+  async add(addUser: AddUserRequest) {
+    console.log('增加使用者',addUser.email)
+    return await UserModel.create({
       id: randomUUID(),
-      name: addUser.name,
+      name: addUser.name || '',
       account: addUser.account,
       password: addUser.password,
       email: addUser.email,
