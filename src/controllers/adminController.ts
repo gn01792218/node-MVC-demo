@@ -67,10 +67,20 @@ export const getSignupPage = (req: Request, res: Response) => {
 export const postSignup = async (req: Request, res: Response) => {
   const { name , account, password, email }: AddUserRequest = req.body;
   //1.先檢查account、email是否已經被註冊過了
-  const exsitUser = await userReposiitory.getByWhere({email, account})
-  if(exsitUser) {
+  const sameAccountUser = await userReposiitory.getByWhere({account})
+  const sameEmailUser = await userReposiitory.getByWhere({email})
+  if(sameAccountUser) {
     //已經有人註冊過了，停留在註冊頁面
-    req.flash('error','此email或account已經有人註冊過了!')
+    req.flash('error','此account已經有人註冊過了!')
+    return res.render("admin/Signup", {
+      serverMsg:req.flash('error'),
+      pageTitle: "AdminSignup",
+      layout: "layouts/adminLayout",
+    });
+  }
+if(sameEmailUser) {
+    //已經有人註冊過了，停留在註冊頁面
+    req.flash('error','此email已經有人註冊過了!')
     return res.render("admin/Signup", {
       serverMsg:req.flash('error'),
       pageTitle: "AdminSignup",
@@ -86,6 +96,7 @@ export const postSignup = async (req: Request, res: Response) => {
     email
   })
   res.status(200).render("admin/Login", {
+    serverMsg:'',
     pageTitle: "AdminLogin",
     layout: "layouts/adminLayout",
   });
