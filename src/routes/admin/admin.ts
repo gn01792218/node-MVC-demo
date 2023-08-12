@@ -1,5 +1,6 @@
 
 import { Router } from 'express'
+import { signUpValidate } from '../../middleware/validators/adminValidator.js'
 import { 
     getSignupPage, 
     postSignup, 
@@ -8,10 +9,12 @@ import {
     postLogout, 
     getAdminHomePage 
 } from '../../controllers/adminController.js'
+import { validateErrorHandle } from '../../middleware/errorHandle.js'
 
 const router = Router()
+
 router.get('/signup', getSignupPage)
-router.post('/signup', postSignup)
+router.post('/signup', signUpValidate, validateErrorHandle, postSignup)
 
 router.get('/login', getLoginPage)
 router.post('/login', postLogin)
