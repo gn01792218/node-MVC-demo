@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserLoginRequest, AddUserRequest } from "../types/user.js";
 import { UserRepository } from "../repositories/userReposiitory.js";
 import bcrypt from 'bcryptjs'
-const userReposiitory = new UserRepository()
+const userRepository = new UserRepository()
 
 export const getAdminHomePage = (req: Request, res: Response) => {
   if (!res.locals.isLogin) {
@@ -27,7 +27,7 @@ export const getLoginPage = (req: Request, res: Response) => {
 };
 export const postLogin = async (req: Request, res: Response) => {
   const { account, password }: UserLoginRequest = req.body;
-  const user = await userReposiitory.getByWhere({account})
+  const user = await userRepository.getByWhere({account})
   if (!user) {
     req.flash('error','找不到該帳號')
     //找不到回登入頁
@@ -66,30 +66,10 @@ export const getSignupPage = (req: Request, res: Response) => {
 };
 export const postSignup = async (req: Request, res: Response) => {
   const { name , account, password, email }: AddUserRequest = req.body;
-  //1.先檢查account、email是否已經被註冊過了
-  const sameAccountUser = await userReposiitory.getByWhere({account})
-  const sameEmailUser = await userReposiitory.getByWhere({email})
-  if(sameAccountUser) {
-    //已經有人註冊過了，停留在註冊頁面
-    req.flash('error','此account已經有人註冊過了!')
-    return res.render("admin/Signup", {
-      serverMsg:req.flash('error'),
-      pageTitle: "AdminSignup",
-      layout: "layouts/adminLayout",
-    });
-  }
-if(sameEmailUser) {
-    //已經有人註冊過了，停留在註冊頁面
-    req.flash('error','此email已經有人註冊過了!')
-    return res.render("admin/Signup", {
-      serverMsg:req.flash('error'),
-      pageTitle: "AdminSignup",
-      layout: "layouts/adminLayout",
-    });
-  }
-  //2.沒有人註冊過該email就++
+  //2.沒有人註冊過該email會自動++
+  //在middleware中會去驗證
   const hashPwd = await bcrypt.hash(password,12)
-  await userReposiitory.add({
+  await userRepository.add({
     name,
     account,
     password:hashPwd,

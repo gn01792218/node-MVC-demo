@@ -3,5 +3,6 @@
 export enum ValidateProperty{
     EMAIL = 'email',
     PASSWORD = 'password',
-    CONFIRMPASSWORD = 'confirmPassword'
+    CONFIRMPASSWORD = 'confirmPassword',
+    ACCOUNT = 'account'
 }

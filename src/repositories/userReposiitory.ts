@@ -5,7 +5,6 @@ import { Optional, WhereOptions } from "sequelize";
 import { randomUUID, UUID } from "crypto";
 export class UserRepository implements IUserRepository {
   async add(addUser: AddUserRequest) {
-    console.log('增加使用者',addUser.email)
     return await UserModel.create({
       id: randomUUID(),
       name: addUser.name || '',
