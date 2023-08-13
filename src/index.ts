@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import ejsLayouts from "express-ejs-layouts";
 import indexRoute from "./routes/index.js";
 import { resLocalsStorage } from './middleware/resLocalsStorage.js'
-
+import { errorHandle } from './middleware/errorHandle.js'
 import db from "./data/database.js";
 import UserModel from "./data/Models/user.js";
 import ProjectModel from "./data/Models/project.js";
@@ -50,7 +50,10 @@ app.use(session({
 
 //路由
 app.use(resLocalsStorage)
-app.use(indexRoute);
+app.use(indexRoute)
+
+//錯誤攔截
+app.use(errorHandle) 
 
 //建立關聯
 UserModel.hasMany(ProjectModel,{

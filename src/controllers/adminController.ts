@@ -1,6 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserLoginRequest, AddUserRequest } from "../types/user.js";
 import { UserRepository } from "../repositories/userReposiitory.js";
+import { customErrorObject } from "../utils/errorUtils.js"
 import bcrypt from 'bcryptjs'
 const userRepository = new UserRepository()
 
@@ -25,9 +26,12 @@ export const getLoginPage = (req: Request, res: Response) => {
     layout: "layouts/adminLayout",
   });
 };
-export const postLogin = async (req: Request, res: Response) => {
+export const postLogin = async (req: Request, res: Response, next:NextFunction) => {
   const { account, password }: UserLoginRequest = req.body;
+
   const user = await userRepository.getByWhere({account})
+  .catch((err)=>next(customErrorObject(err)))
+
   if (!user) {
     req.flash('error','找不到該帳號')
     //找不到回登入頁
@@ -38,6 +42,8 @@ export const postLogin = async (req: Request, res: Response) => {
     });
   }
   const vaildPwd = await bcrypt.compare(password, user?.password!)
+  .catch((err)=>next(customErrorObject(err, 'bcrypt解析的時候發生了問題')))
+
   if(!vaildPwd){
     req.flash('error','密碼錯誤')
     //找不到回登入頁
@@ -64,20 +70,24 @@ export const getSignupPage = (req: Request, res: Response) => {
     layout: "layouts/adminLayout",
   });
 };
-export const postSignup = async (req: Request, res: Response) => {
+export const postSignup = async (req: Request, res: Response, next:NextFunction) => {
   const { name , account, password, email }: AddUserRequest = req.body;
   //2.沒有人註冊過該email會自動++
   //在middleware中會去驗證
-  const hashPwd = await bcrypt.hash(password,12)
+  const hashPwd =await bcrypt.hash(password,12)
+  .catch((err)=>next(customErrorObject(err, 'bcrypt加密的時候發生了問題')))
+
   await userRepository.add({
     name,
     account,
-    password:hashPwd,
+    password:hashPwd!,
     email
   })
+  .catch((err)=>next(customErrorObject(err)))
+
   res.status(200).render("admin/Login", {
     serverMsg:'',
     pageTitle: "AdminLogin",
     layout: "layouts/adminLayout",
   });
-};
+}
